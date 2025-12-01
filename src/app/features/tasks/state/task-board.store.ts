@@ -28,4 +28,18 @@ export class TaskBoardStore {
       list.map(t => (t.id === id ? { ...t, status, updatedAt: Date.now() } : t))
     )
   }
+
+  update(id: string, changes: { title?: string; description?: string }) {
+  this.tasks.update(list =>
+    list.map(t =>
+      t.id === id
+        ? { ...t, ...changes, updatedAt: Date.now() }
+        : t
+    )
+  );
+}
+
+remove(id: string) {
+  this.tasks.update(list => list.filter(t => t.id !== id));
+}
 }

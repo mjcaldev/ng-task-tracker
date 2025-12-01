@@ -11,7 +11,11 @@ import { TaskCard } from './task-card.component';
       <h2>{{ title }}</h2>
       <div class="stack">
         @for (t of tasks; track t.id) {
-        <app-task-card [task]="t" (moveLeft)="emitMove(t, -1)" (moveRight)="emitMove(t, +1)">
+        <app-task-card 
+        [task]="t"
+        (open)="clickTask.emit(t)"
+        (moveLeft)="emitMove(t, -1)" 
+        (moveRight)="emitMove(t, +1)">
         </app-task-card>
         }
       </div>
@@ -43,6 +47,7 @@ export class TaskColumn {
   @Input() title!: string;
   @Input() tasks: Task[] = [];
   @Output() move = new EventEmitter<{ id: string; to: 'todo' | 'doing' | 'done' }>();
+  @Output() clickTask = new EventEmitter<Task>();
 
   private readonly order: ('todo' | 'doing' | 'done')[] = ['todo', 'doing', 'done'];
 

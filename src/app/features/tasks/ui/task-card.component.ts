@@ -5,7 +5,7 @@ import { Task } from '../models/task';
   standalone: true,
   selector: 'app-task-card',
   template: `
-  <article class="card">
+  <article class="card" (click)="open.emit()">
     <header>
       <strong>{{ task.title }}</strong>
     </header>
@@ -14,9 +14,9 @@ import { Task } from '../models/task';
   }
 
   <footer class="actions">
-      <button (click)="moveLeft.emit()">◀︎</button>
+      <button (click)="moveLeft.emit(); $event.stopPropagation()">◀︎</button>
       <span class="status">{{ task.status }}</span>
-      <button (click)="moveRight.emit()">▶︎</button>
+      <button (click)="moveRight.emit(); $event.stopPropagation()">▶︎</button>
     </footer>
   </article>
   `,
@@ -50,4 +50,5 @@ export class TaskCard {
   @Input() task!: Task;
   @Output() moveLeft = new EventEmitter<void>();
   @Output() moveRight = new EventEmitter<void>();
+  @Output() open = new EventEmitter<void>();
 }
