@@ -1,59 +1,90 @@
-# NgTaskTracker
+# ng-task-tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+A minimal, modern task board built with Angular 18, Standalone Components, and Signals.  
+Includes a three-column Kanban layout (To Do / Doing / Done), a slide-out task editor, and a lightweight signal-based store for state management.
 
-## Development server
+---
 
-To start a local development server, run:
+## Features
 
-```bash
+- Create tasks  
+- Move tasks between columns  
+- Click-to-edit with slide-out detail panel  
+- Update or delete tasks  
+- Fully reactive state using Angular Signals  
+- Simple, modular component architecture  
+
+---
+
+## Tech Stack
+
+- Angular 18  
+- Standalone Components  
+- Signals API  
+- TypeScript + SCSS  
+
+---
+
+## Project Structure
+
+src/app/
+models/
+state/
+ui/
+pages/
+app.routes.ts
+app.config.ts
+
+yaml
+Copy code
+
+---
+
+## Development
+
+Install and run:
+
+npm install
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+yaml
+Copy code
 
-## Code scaffolding
+App runs at:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+http://localhost:4200
 
-```bash
-ng generate component component-name
-```
+yaml
+Copy code
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Production build:
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+markdown
+Copy code
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Next Steps
 
-```bash
-ng test
-```
+### Electron Integration
 
-## Running end-to-end tests
+- Bundle Angular with Electron for a desktop version  
+- Expose local filesystem for offline task storage  
+- Optional: integrate IndexedDB or SQLite via Electron main process  
 
-For end-to-end (e2e) testing, run:
+### AWS Backend Integration
 
-```bash
-ng e2e
-```
+- Deploy backend via:
+  - API Gateway  
+  - AWS Lambda (Node or Python)  
+  - DynamoDB (task storage)  
+- Use Angular HttpClient to sync tasks (CRUD + real-time updates using DynamoDB Streams or WebSockets)  
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Additional Enhancements
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Drag-and-drop task movement (Angular CDK)  
+- LocalStorage or IndexedDB persistence  
+- UI polish + animations  
+- Optional PWA mode for offline-first support  
