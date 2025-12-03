@@ -11,7 +11,7 @@ import { Task } from '../models/task';
       <aside class="panel">
         <header>
           <h3>Edit Task</h3>
-          <button class="close" (click)="close.emit()">×</button>
+          <button class="close" (click)="closed.emit()">×</button>
         </header>
 
         <form (submit)="submit($event)">
@@ -99,7 +99,7 @@ import { Task } from '../models/task';
 export class TaskDetailPanel {
   /** Inputs & Outputs */
   @Input() task: Task | null = null;
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
   @Output() save = new EventEmitter<{ id: string; title: string; description: string }>();
   @Output() delete = new EventEmitter<string>();
 
