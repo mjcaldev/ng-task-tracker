@@ -51,15 +51,4 @@ export class TaskCard {
   @Output() moveLeft = new EventEmitter<void>();
   @Output() moveRight = new EventEmitter<void>();
   @Output() open = new EventEmitter<void>();
-
-  // Prevent arrow click from triggering `open`
-  onLeft(event: Event) {
-    event.stopPropagation();
-    this.moveLeft.emit();
-  }
-
-  onRight(event: Event) {
-    event.stopPropagation();
-    this.moveRight.emit();
-  }
 }
