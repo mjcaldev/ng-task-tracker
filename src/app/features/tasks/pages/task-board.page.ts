@@ -34,7 +34,7 @@ import { Task } from '../models/task';
       </main>
       <app-task-detail-panel
         [task]="selectedTask()"
-        (close)="closeDetail()"
+        (closed)="closeDetail()"
         (save)="onSave($event)"
         (delete)="onDelete($event)"
       >

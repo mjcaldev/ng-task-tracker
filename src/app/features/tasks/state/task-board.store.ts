@@ -3,7 +3,7 @@ import { Task, TaskStatus } from '../models/task';
 
 @Injectable({ providedIn: 'root' })
 export class TaskBoardStore {
-  private tasks = signal<Task[]>([]);
+  private readonly tasks = signal<Task[]>([]);
 
   //Derived Lists
   todo = computed(() => this.tasks().filter(t => t.status === 'todo'));
