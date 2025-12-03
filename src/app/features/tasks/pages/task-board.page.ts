@@ -26,10 +26,20 @@ import { Task } from '../models/task';
         >
         </app-task-column>
 
-        <app-task-column title="Doing" [tasks]="store.doing()" (move)="onMove($event)">
+        <app-task-column 
+        title="Doing" 
+        [tasks]="store.doing()" 
+        (move)="onMove($event)"
+        (clickTask)="openDetail($event)"
+        >
         </app-task-column>
 
-        <app-task-column title="Done" [tasks]="store.done()" (move)="onMove($event)">
+        <app-task-column 
+        title="Done" 
+        [tasks]="store.done()" 
+        (move)="onMove($event)"
+        (clickTask)="openDetail($event)"
+        >
         </app-task-column>
       </main>
       <app-task-detail-panel

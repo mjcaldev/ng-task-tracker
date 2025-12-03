@@ -1,9 +1,20 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
 import { Task, TaskStatus } from '../models/task';
 
 @Injectable({ providedIn: 'root' })
 export class TaskBoardStore {
   private readonly tasks = signal<Task[]>([]);
+
+  constructor() {
+    const saved = localStorage.getItem('taskBoard');
+    if (saved) {
+      this.tasks.set(JSON.parse(saved))
+    }
+
+    effect(() => {
+      localStorage.setItem('taskBoard', JSON.stringify(this.tasks()));
+    });
+  }
 
   //Derived Lists
   todo = computed(() => this.tasks().filter(t => t.status === 'todo'));
