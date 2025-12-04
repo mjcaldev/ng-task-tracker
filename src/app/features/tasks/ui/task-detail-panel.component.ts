@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, signal, effect } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal, OnChanges, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Task } from '../models/task';
 
@@ -17,12 +17,22 @@ import { Task } from '../models/task';
         <form (submit)="submit($event)">
           <label>
             Title
-            <input [(ngModel)]="draft().title" name="title" required />
+            <input 
+              [ngModel]="draft().title"
+              (ngModelChange)="onTitleChange($event)" 
+              name="title" 
+              required
+            />
           </label>
 
           <label>
             Description
-            <textarea [(ngModel)]="draft().description" name="description"></textarea>
+            <textarea 
+            [ngModel]="draft().description"
+            (ngModelChange)="onDescriptionChange($event)"
+            name="description"
+            >
+            </textarea>
           </label>
 
           <footer class="actions">
@@ -96,7 +106,7 @@ import { Task } from '../models/task';
     }
   `]
   })
-export class TaskDetailPanel {
+export class TaskDetailPanel implements OnChanges {
   /** Inputs & Outputs */
   @Input() task: Task | null = null;
   @Output() closed = new EventEmitter<void>();
@@ -106,16 +116,13 @@ export class TaskDetailPanel {
   /** Local state for editing */
   draft = signal<{ title: string; description: string }>({ title: '', description: '' });
 
-  constructor() {
-    // Keep draft in sync when input changes
-    effect(() => {
-      if (this.task) {
-        this.draft.set({
-          title: this.task.title,
-          description: this.task.description ?? '',
-        });
-      }
-    });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['task'] && this.task) {
+      this.draft.set({
+        title: this.task.title,
+        description: this.task.description ?? '',
+      });
+    }
   }
 
   /** Submit handler */
@@ -124,5 +131,13 @@ export class TaskDetailPanel {
     if (!this.task) return;
     const { title, description } = this.draft();
     this.save.emit({ id: this.task.id, title, description });
+  }
+
+  onTitleChange(value: string) {
+    this.draft.update(d => ({ ...d, title: value}));
+  }
+
+  onDescriptionChange(value: string) {
+    this.draft.update(d => ({ ...d, description: value}));
   }
 }
