@@ -104,10 +104,103 @@ import { Task } from '../models/task';
       background: #007bff;
       color: white;
     }
+  /* Backdrop behind the panel */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.25s ease forwards;
+  z-index: 9;
+}
+
+/* Slide-in animation for the panel */
+.panel {
+  animation: slideIn 0.25s ease forwards;
+}
+
+/* Cleaner panel visual design */
+.panel {
+  border-radius: 0 0 0 12px;
+  padding: 1.25rem;
+  background: #ffffff;
+  box-shadow: -4px 0 18px rgba(0,0,0,0.12);
+}
+
+header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.close {
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0.25rem;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.close:hover {
+  background: #f3f4f6;
+}
+
+/* Inputs */
+input, textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.9rem;
+}
+
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Action buttons */
+.primary {
+  background: #2563eb;
+  color: white;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.delete {
+  background: #dc2626;
+  color: white;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.delete:hover {
+  background: #b91c1c;
+  transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
   `]
   })
 export class TaskDetailPanel implements OnChanges {
-  /** Inputs & Outputs */
+
   @Input() task: Task | null = null;
   @Output() closed = new EventEmitter<void>();
   @Output() save = new EventEmitter<{ id: string; title: string; description: string }>();

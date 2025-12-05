@@ -11,11 +11,12 @@ import { TaskCard } from './task-card.component';
       <h2>{{ title }}</h2>
       <div class="stack">
         @for (t of tasks; track t.id) {
-        <app-task-card 
-        [task]="t"
-        (open)="clickTask.emit(t)"
-        (moveLeft)="emitMove(t, -1)" 
-        (moveRight)="emitMove(t, +1)">
+        <app-task-card
+          [task]="t"
+          (open)="clickTask.emit(t)"
+          (moveLeft)="emitMove(t, -1)"
+          (moveRight)="emitMove(t, +1)"
+        >
         </app-task-card>
         }
       </div>
@@ -30,15 +31,39 @@ import { TaskCard } from './task-card.component';
         min-height: 60vh;
         display: flex;
         flex-direction: column;
+        border: 1px solid #e3e3e3;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+        transition: background 0.2s ease;
       }
-      .stack {
-        display: grid;
-        gap: 0.5rem;
+
+      .col:hover {
+        background: #f0f0f0;
       }
+
       h2 {
         margin: 0.25rem 0 0.75rem;
         font-size: 1.1rem;
         font-weight: 600;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        color: #333;
+      }
+      .stack {
+        display: grid;
+        flex-direction: column;
+        gap: 0.5rem;
+        overflow-y: auto;
+        padding-right: 4px;
+        flex: 1;
+      }
+
+      .stack::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .stack::-webkit-scrollbar-thumb {
+        background: #c4c4c4;
+        border-radius: 6px;
       }
     `,
   ],
